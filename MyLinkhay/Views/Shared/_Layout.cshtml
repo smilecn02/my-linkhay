@@ -2,17 +2,164 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <title>@ViewBag.Title - My Linkhay Application</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/css", "~/Content/themes/base/css", "~/Content/bootstrap")
         @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery");
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.ajaxSetup({ cache: false });
+
+                $("#google").on("click", function (e) {
+                    var url = $(this).attr('href');
+                    $("#dialog-confirm").dialog({
+                        autoOpen: false,
+                        resizable: false,
+                        height: 170,
+                        width: 350,
+                        show: { effect: 'drop', direction: 'up' },
+                        modal: true,
+                        draggable: true,
+                        buttons: {
+                            'OK': function () {
+                                $(this).dialog("close");
+                                window.location = url;
+                            },
+                            "Cancel": function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+
+                    $("#dialog-confirm").dialog('open');
+                    return false;
+                });
+
+
+                $("#openDialog").on("click", function (e) {
+                    e.preventDefault();
+
+                    var url = $(this).attr('href');
+
+                    $("#dialog-edit").dialog({
+                        title: 'Add Student',
+                        autoOpen: false,
+                        resizable: false,
+                        height: 355,
+                        width: 400,
+                        show: { effect: 'drop', direction: "up" },
+                        modal: true,
+                        draggable: true,
+                        open: function (event, ui) {
+                            $(this).load(url);
+                        },
+                        close: function (event, ui) {
+                            $(this).dialog('close');
+                        }
+                    });
+
+                    $("#dialog-edit").dialog('open');
+                    return false;
+                });
+
+                $(".editDialog").on("click", function (e) {
+                    var url = $(this).attr('href');
+
+                    $("#dialog-edit").dialog({
+                        title: 'Edit Customer',
+                        autoOpen: false,
+                        resizable: false,
+                        height: 355,
+                        width: 400,
+                        show: { effect: 'drop', direction: 'up' },
+                        modal: true,
+                        draggable: true,
+                        open: function (event, ui) {
+                            $(this).load(url);
+                        },
+                        close: function (event, ui) {
+                            $(this).dialog('close');
+                        }
+                    });
+
+                    $("#dialog-edit").dialog('open');
+                    return false;
+                });
+
+                $(".confirmDialog").on("click", function (e) {
+                    var url = $(this).attr('href');
+                    $("#dialog-confirm").dialog({
+                        autoOpen: false,
+                        resizable: false,
+                        height: 170,
+                        width: 350,
+                        show: { effect: 'drop', direction: 'up' },
+                        modal: true,
+                        draggable: true,
+                        buttons: {
+                            'OK': function () {
+                                $(this).dialog("close");
+                                window.location = url;
+                            },
+                            "Cancel": function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+
+                    $("#dialog-confirm").dialog('open');
+                    return false;
+                });
+
+                
+
+                $(".viewDialog").on("click", function (e) {
+                    var url = $(this).attr('href');
+
+                    $("#dialog-view").dialog({
+                        title: 'View Customer',
+                        autoOpen: false,
+                        resizable: false,
+                        height: 355,
+                        width: 400,
+                        show: { effect: 'drop', direction: 'up' },
+                        modal: true,
+                        draggable: true,
+                        open: function (event, ui) {
+                            $(this).load(url);
+                        },
+                        buttons: {
+                            "Close": function () {
+                                $(this).dialog("close");
+                            }
+                        },
+                        close: function (event, ui) {
+                            $(this).dialog('close');
+                        }
+                    });
+
+                    $("#dialog-view").dialog('open');
+                    return false;
+                });
+
+                $("#btncancel").on("click", function (e) {
+                    $("#dialog-edit").dialog('close');
+                });
+
+
+
+            });
+        </script>
+
     </head>
     <body>
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+                    <p class="site-title">@Html.ActionLink("Khắc Trinh website", "Index", "Home")</p>
                 </div>
                 <div class="float-right">
                     <section id="login">
@@ -42,7 +189,9 @@
             </div>
         </footer>
 
-        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap", "~/bundles/jqueryui")
         @RenderSection("scripts", required: false)
+
+        
     </body>
 </html>

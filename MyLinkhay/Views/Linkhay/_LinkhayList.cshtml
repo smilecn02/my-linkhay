@@ -1,0 +1,35 @@
+﻿@model IPagedList<Linkhay>
+
+<table class="table table-striped table-bordered">
+    <tr>
+        <th width="500px">
+            @Html.DisplayNameFor(model => model.First().Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().UpdateDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="@item.Url" target="_blank">@item.Description</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "editDialog" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "viewDialog" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id },
+                new { id = "btndelete", @class = "confirmDialog" })
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="pagedList">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.Classic)
+</div>

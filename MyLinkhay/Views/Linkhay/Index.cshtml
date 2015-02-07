@@ -1,46 +1,30 @@
-﻿@model IEnumerable<MyLinkhay.Models.Linkhay>
+﻿@model IPagedList<Linkhay>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Link hay application</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @id = "openDialog", @class = "btn btn-primary" })
 </p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Url)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdateDate)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @*@Html.DisplayFor(modelItem => item.Url)*@
-            <a href="@item.Url" target="_blank">Liên kết</a>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdateDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
 
-</table>
+@Html.Partial("_LinkhayList", Model)
+
+<div id="dialog-confirm" style="display: none">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;">
+        </span>
+        Are you sure to delete?
+    </p>
+</div>
+
+<div id="dialog-edit" style="display: none"></div>
+
+<div id="dialog-view" style="display: none"></div>
+
+
+
+
