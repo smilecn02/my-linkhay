@@ -1,22 +1,2 @@
 ﻿@model Linkhay
-
-@{
-    ViewBag.Title = "Create";
-}
-
-<h2>Create</h2>
-
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
-    @Html.Partial("_LinkhayCreate", Model)
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+@Html.Partial("_LinkhayCreate", Model)

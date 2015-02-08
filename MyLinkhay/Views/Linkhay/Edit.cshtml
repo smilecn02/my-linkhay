@@ -1,15 +1,5 @@
 ﻿@model Linkhay
+@Html.Partial("_LinkhayEdit", Model)
 
-@{
-    ViewBag.Title = "Edit";
-}
-
-<h2>Edit</h2>
-
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-   
-    @Html.Partial("_LinkhayEdit", Model)
-}
 
 
